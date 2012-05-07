@@ -1,0 +1,202 @@
+" Modeline and Notes {
+" vim: set foldmarker={,} foldlevel=0 foldmethod=marker:
+"
+" Based on:
+"   https://github.com/spf13/spf13-vim/blob/3.0/.vimrc
+"   https://github.com/skwp/dotfiles/blob/master/vimrc
+" }
+
+
+" Enviroment {
+  " Basic {
+    " Use Vim settings, rather then Vi settings (much better!).
+    " This must be first, because it changes other options as a side effect.
+    set nocompatible
+  " }
+
+  " Setup Bundle Support {
+    filetype off  " required !
+    set rtp+=~/.vim/bundle/vundle/
+    call vundle#rc()
+  " }
+" }
+
+
+" Bundles {
+  " Deps
+    Bundle 'gmarik/vundle'
+"    Bundle 'MarcWeber/vim-addon-mw-utils'
+"    Bundle 'tomtom/tlib_vim'
+"    Bundle 'mileszs/ack.vim'
+
+  " General
+    Bundle 'tpope/vim-fugitive'
+
+  " Navigation
+    Bundle 'Lokaltog/vim-easymotion'
+
+  " UI
+    Bundle 'Lokaltog/vim-powerline'
+"    Bundle 'skwp/vim-powerline'
+    Bundle 'mutewinter/vim-indent-guides'
+"    Bundle 'godlygeek/csapprox'
+"    Bundle 'kien/ctrlp.vim'
+    Bundle 'scrooloose/nerdtree'
+
+  " Colors
+    Bundle 'altercation/vim-colors-solarized'
+    Bundle 'flazz/vim-colorschemes'
+    Bundle 'nanotech/jellybeans.vim'
+
+  " Javascript
+    Bundle 'taxilian/vim-web-indent'
+    "Bundle 'pangloss/vim-javascript'
+    Bundle 'kchmck/vim-coffee-script'
+    Bundle 'leshill/vim-json'
+    Bundle 'itspriddle/vim-jquery'
+
+  " HTML
+    Bundle 'HTML-AutoCloseTag'
+    Bundle 'ChrisYip/Better-CSS-Syntax-for-Vim'
+" }
+
+
+" General {
+  filetype plugin indent on   " Automatically detect file types. (must turn on after Vundle)
+  syntax on                   " syntax highlighting
+  set mouse=a                 " automatically enable mouse usage
+  scriptencoding utf-8
+
+  set shortmess+=filmnrxoOtT  " abbrev. of messages (avoids 'hit enter')
+  set viewoptions=folds,options,cursor,unix,slash " better unix / windows compatibility
+  set virtualedit=onemore     " allow for cursor beyond last character
+  set history=1000            " Store a ton of history (default is 20)
+  set hidden                  " allow buffer switching without saving - http://items.sjbach.com/319/configuring-vim-right
+
+  " Swaps {
+    " Turn Off Swap Files
+    set noswapfile
+    set nobackup
+    set nowb
+  " }
+
+" }
+
+
+" Vim UI {
+  set t_Co=256
+
+  set background=dark         " Assume a dark background
+  colorschem jellybeans
+
+  set tabpagemax=15               " only show 15 tabs
+  set showmode                    " display the current mode
+
+  set nu                          " line numbers on
+  set cursorline                  " highlight current line
+  set gcr=a:blinkon0              " disable cursor blink
+  set visualbell                  " no sounds
+
+  if has('cmdline_info')
+    set ruler                   " show the ruler
+    set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " a ruler on steroids
+    set showcmd                 " show partial commands in status line and
+                                " selected characters/lines in visual mode
+  endif
+
+  if has('statusline')
+    set laststatus=2
+
+    " Broken down into easily includeable segments
+    set statusline=%<%f\                     " Filename
+    set statusline+=%w%h%m%r                 " Options
+"    set statusline+=%{fugitive#statusline()} " Git Hotness
+    set statusline+=\ [%{&ff}/%Y]            " filetype
+    set statusline+=\ [%{getcwd()}]          " current dir
+    set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+  endif
+
+  set backspace=indent,eol,start  " allow backspace in insert mode
+  set linespace=0                 " no extra spaces between rows
+  set showmatch                   " show matching brackets/parenthesis
+  set incsearch                   " find as you type search
+  set hlsearch                    " highlight search terms
+  set winminheight=0              " windows can be 0 line high
+  set ignorecase                  " case insensitive search
+  set smartcase                   " case sensitive when uc present
+  set wildmenu                    " show list instead of just completing
+  set wildmode=list:longest,full  " command <Tab> completion, list matches, then longest common part, then all.
+  set whichwrap=b,s,h,l,<,>,[,]   " backspace and cursor keys wrap to
+
+  set list
+  set listchars=tab:\ \ ,trail:·  " Display tabs and trailing spaces visually
+
+  " Folds {
+    set nofoldenable                  " no auto fold code
+    set foldmethod=indent           " fold based on indent
+    set foldnestmax=3               " deepest fold is 3 levels
+  " }
+
+  " Scrolling {
+    set scrolljump=5                " lines to scroll when cursor leaves screen
+    set scrolloff=8                 " Start scrolling when we're 8 lines away from margins
+    set sidescrolloff=15
+    set sidescroll=1
+  " }
+
+" }
+
+
+" Formatting {
+  set nowrap                      " wrap long lines
+  set autoindent                  " indent at the same level of the previous line
+  set shiftwidth=4                " use indents of 4 spaces
+  set expandtab                   " tabs are spaces, not tabs
+  set tabstop=4                   " an indentation every four columns
+  set softtabstop=4               " let backspace delete indent
+" }
+
+
+" Key (re)Mappings {
+" }
+
+
+" Plugins {
+  " Powerline {
+    let g:Powerline_symbols='fancy'
+"    let g:Powerline_theme='skwp'
+"    let g:Powerline_colorscheme='skwp'
+  " }
+" }
+
+" Functions {
+function! ColorSolarized()
+  color solarized                 " load colorscheme
+    let g:solarized_termtrans=1
+    let g:solarized_termcolors=256
+    let g:solarized_contrast="high"
+    let g:solarized_visibility="high"
+endfunction
+" }
+
+" GUI Settings {
+  if has('gui_running')
+    set guioptions-=T           " remove the toolbar
+    set guifont=Monaco\ for\ Powerline
+    call ColorSolarized()
+"    set lines=40                " 40 lines of text instead of 24,
+"    set guifont=Andale\ Mono\ Regular:h16,Menlo\ Regular:h15,Consolas\ Regular:h16,Courier\ New\ Regular:h18
+    if has('gui_macvim')
+      set transparency=5          " Make the window slightly transparent
+    endif
+  endif
+" }
+
+
+" ================ Indentation ======================
+
+set smartindent
+set smarttab
+
+set linebreak    "Wrap lines at convenient points
+
