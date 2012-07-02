@@ -42,6 +42,7 @@
 "    Bundle 'godlygeek/csapprox'
 "    Bundle 'kien/ctrlp.vim'
     Bundle 'scrooloose/nerdtree'
+    Bundle 'myusuf3/numbers.vim'
 
   " Colors
     Bundle 'altercation/vim-colors-solarized'
@@ -156,6 +157,10 @@
   set softtabstop=4               " let backspace delete indent
 " }
 
+" Visual guidance {
+  set relativenumber              " setting line numbers
+  set colorcolumn=81              " line to show 81 character mark
+" }
 
 " Key (re)Mappings {
 " }
