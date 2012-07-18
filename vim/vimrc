@@ -163,6 +163,8 @@
 " }
 
 " Key (re)Mappings {
+    " Give a shortcut key to NERD Tree
+    map <F2> :NERDTreeToggle<CR>
 " }
 
 
@@ -171,6 +173,12 @@
     let g:Powerline_symbols='fancy'
 "    let g:Powerline_theme='skwp'
 "    let g:Powerline_colorscheme='skwp'
+  " }
+
+  " NERDTree {
+    "autopen NERDTree and focus cursor in new document if not param passed
+    autocmd VimEnter * if !argc() | NERDTree | endif
+    autocmd VimEnter * wincmd p
   " }
 " }
 
