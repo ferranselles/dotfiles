@@ -42,7 +42,7 @@
 "    Bundle 'godlygeek/csapprox'
 "    Bundle 'kien/ctrlp.vim'
     Bundle 'scrooloose/nerdtree'
-    Bundle 'myusuf3/numbers.vim'
+"    Bundle 'myusuf3/numbers.vim'
 
   " Colors
     Bundle 'altercation/vim-colors-solarized'
@@ -65,7 +65,7 @@
 " General {
   filetype plugin indent on   " Automatically detect file types. (must turn on after Vundle)
   syntax on                   " syntax highlighting
-  set mouse=a                 " automatically enable mouse usage
+"  set mouse=a                 " automatically enable mouse usage
   scriptencoding utf-8
 
   set shortmess+=filmnrxoOtT  " abbrev. of messages (avoids 'hit enter')
@@ -158,7 +158,7 @@
 " }
 
 " Visual guidance {
-  set relativenumber              " setting line numbers
+"  set relativenumber              " setting line numbers
   set colorcolumn=81              " line to show 81 character mark
 " }
 
