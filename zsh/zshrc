@@ -11,7 +11,7 @@ ZSH=$HOME/.oh-my-zsh
 #ZSH_THEME="robbyrussell"
 #ZSH_THEME="skwp"
 #ZSH_THEME="prose"
-ZSH_THEME="fsm"
+ZSH_THEME="agnoster"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -39,8 +39,15 @@ plugins=(git osx ruby brew node npm)
 
 source $ZSH/oh-my-zsh.sh
 
+# dircolors solarized
+eval `dircolors ~/Development/dotfiles/console/dircolors.256dark`
+
+# on Mac: we need ls from coreutils
+#eval `gdircolors ~/Development/dotfiles/console/dircolors.256dark`
+#alias ls='gls --color=auto -FG'
+
 # Customize to your needs...
-export PATH=/usr/local/bin:~/.bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/texbin
+export PATH=/usr/local/bin:~/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/texbin
 
 # -------------------------------------------------------------------
 # Load RVM into a shell session *as a function*
