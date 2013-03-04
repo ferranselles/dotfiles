@@ -5,6 +5,7 @@
 pip install paramiko PyYAML jinja2
 
 APPS_DIR="$HOME/.apps"
+BIN_DIR="$HOME/bin/"
 ANSIBLE_DIR="$APPS_DIR/ansible"
 CONFIG_DIR="$APPS_DIR/etc"
 ANSIBLE_CONFIG_DIR="$CONFIG_DIR/ansible"
@@ -37,10 +38,9 @@ echo "Add your servers to $ANSIBLE_CONFIG_DIR/hosts"
 ANSIBLE_ENV_FILE="$ANSIBLE_DIR/hacking/env-setup"
 sed -i '' 's_$PWD_'"$ANSIBLE_DIR"'_' $ANSIBLE_ENV_FILE
 
-# Creates a new env.sh to be sourced when starting the console
-if [ ! -f "$ANSIBLE_CONFIG_DIR/env.sh" ]; then
-    echo "source $ANSIBLE_ENV_FILE -q" > "$ANSIBLE_CONFIG_DIR/env.sh"
-    echo "export ANSIBLE_HOSTS=$ANSIBLE_CONFIG_DIR/hosts" >> "$ANSIBLE_CONFIG_DIR/env.sh"
+# Creates env-ansible.sh to be loaded before using Ansible
+if [ ! -f "$BIN_DIR/env-ansible.sh" ]; then
+    echo "source $ANSIBLE_ENV_FILE -q" > "$BIN_DIR/env-ansible.sh"
+    echo "export ANSIBLE_HOSTS=$ANSIBLE_CONFIG_DIR/hosts" >> "$BIN_DIR/env-ansible.sh"
 fi
 
-echo "Include $ANSIBLE_CONFIG_DIR/env.sh to be loaded"
