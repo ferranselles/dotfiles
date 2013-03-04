@@ -38,9 +38,11 @@ echo "Add your servers to $ANSIBLE_CONFIG_DIR/hosts"
 ANSIBLE_ENV_FILE="$ANSIBLE_DIR/hacking/env-setup"
 sed -i '' 's_$PWD_'"$ANSIBLE_DIR"'_' $ANSIBLE_ENV_FILE
 
-# Creates env-ansible.sh to be loaded before using Ansible
-if [ ! -f "$BIN_DIR/env-ansible.sh" ]; then
-    echo "source $ANSIBLE_ENV_FILE -q" > "$BIN_DIR/env-ansible.sh"
-    echo "export ANSIBLE_HOSTS=$ANSIBLE_CONFIG_DIR/hosts" >> "$BIN_DIR/env-ansible.sh"
+# Creates env-ansible to be loaded before using Ansible
+if [ ! -f "$BIN_DIR/env-ansible" ]; then
+    echo "#!/bin/sh" > "$BIN_DIR/env_ansible"
+    echo "source $ANSIBLE_ENV_FILE -q" >> "$BIN_DIR/env-ansible"
+    echo "export ANSIBLE_HOSTS=$ANSIBLE_CONFIG_DIR/hosts" >> "$BIN_DIR/env-ansible"
+    chmod u+x "$BIN_DIR/env-ansible"
 fi
 
