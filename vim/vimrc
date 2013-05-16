@@ -21,6 +21,10 @@
   " }
 " }
 
+" Go Lang support {
+" Path dependent it should be done better
+  set runtimepath+=/usr/share/go/misc/vim
+" }
 
 " Bundles {
   " Deps
